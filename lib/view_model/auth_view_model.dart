@@ -15,7 +15,9 @@ class LoginAuth extends ChangeNotifier {
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: countrycode + phone,
       verificationCompleted: (PhoneAuthCredential credential) {},
-      verificationFailed: (FirebaseAuthException e) {},
+      verificationFailed: (FirebaseAuthException e) {
+        Utils.flushBarErrorMessage("Somthing went wroung", context);
+      },
       codeSent: (String verificationId, int? resendToken) {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm_task/utils/utils.dart';
 
 import '../view_model/auth_view_model.dart';
 
@@ -56,11 +57,14 @@ class _Login_ScreenState extends State<Login_Screen> {
                         margin: const EdgeInsets.only(left: 10),
                         child: TextField(
                           controller: phone,
+                          maxLength: 10,
                           keyboardType: TextInputType.phone,
                           style: const TextStyle(
                               fontSize: 20, color: Colors.black),
                           decoration: const InputDecoration(
-                              border: InputBorder.none, hintText: "Phone"),
+                              border: InputBorder.none,
+                              hintText: "Phone",
+                              counterText: ""),
                         ),
                       ),
                     ],
@@ -69,8 +73,13 @@ class _Login_ScreenState extends State<Login_Screen> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: GestureDetector(
-                onTap: () {
-                  LoginAuth.auth_otp(_countrycode.text, phone.text, context);
+                onTap: () async {
+                  if (phone.text.toString().length != 10) {
+                    Utils.flushBarErrorMessage("Enter correct number", context);
+                  } else {
+                    LoginAuth.auth_otp(_countrycode.text, phone.text, context);
+                    Utils.flushBarErrorMessage("Otp sent", context);
+                  }
                 },
                 child: Container(
                   height: 40,
@@ -90,4 +99,6 @@ class _Login_ScreenState extends State<Login_Screen> {
           ],
         ));
   }
+
+  Widget _listviewloading() => const Center(child: CircularProgressIndicator());
 }
