@@ -14,13 +14,13 @@ class Routes {
             builder: (BuildContext context) => const SplashView());
       case Pathname.login:
         return MaterialPageRoute(
-            builder: (BuildContext context) => const Login_Screen());
+            builder: (BuildContext context) => const LoginScreen());
       case Pathname.home:
         return MaterialPageRoute(
             builder: (BuildContext context) => const Todohome());
       case Pathname.save:
         return MaterialPageRoute(
-            builder: (BuildContext context) => const Savetask());
+            builder: (BuildContext context) => const SaveTask());
 
       default:
         return MaterialPageRoute(builder: (_) {

@@ -14,10 +14,6 @@ class LoginAuth extends ChangeNotifier {
     number = countrycode + phone;
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: countrycode + phone,
-      verificationCompleted: (PhoneAuthCredential credential) {},
-      verificationFailed: (FirebaseAuthException e) {
-        Utils.flushBarErrorMessage("Somthing went wroung", context);
-      },
       codeSent: (String verificationId, int? resendToken) {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
@@ -25,6 +21,10 @@ class LoginAuth extends ChangeNotifier {
                       verificationId: verificationId,
                     )),
             (Route<dynamic> route) => false);
+      },
+      verificationCompleted: (PhoneAuthCredential credential) {},
+      verificationFailed: (FirebaseAuthException e) {
+        Utils.flushBarErrorMessage("Somthing went wroung", context);
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );

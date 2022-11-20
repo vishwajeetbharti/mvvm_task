@@ -6,64 +6,83 @@ import 'package:mvvm_task/utils/utils.dart';
 import '../constant/strings.dart';
 import '../utils/routes_name.dart';
 
-class Savetask extends StatefulWidget {
-  const Savetask({Key? key}) : super(key: key);
+class SaveTask extends StatefulWidget {
+  const SaveTask({Key? key}) : super(key: key);
 
   @override
-  State<Savetask> createState() => _SavetaskState();
+  State<SaveTask> createState() => _SaveTaskState();
 }
 
-class _SavetaskState extends State<Savetask> {
-  final TextEditingController _controltask = TextEditingController();
-  final TextEditingController _discripController = TextEditingController();
+class _SaveTaskState extends State<SaveTask> {
+  final TextEditingController _controlTask = TextEditingController();
+  final TextEditingController _controllerDescription = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final format = DateFormat('yyyy-MM-dd HH:mm');
     return Scaffold(
-      backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
       body: Container(
-        height: MediaQuery.of(context).size.height * 0.5,
-        margin: const EdgeInsets.only(left: 40, top: 40),
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/save_page_image.png'),
+                fit: BoxFit.fill)),
         child: Column(
           children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.8,
+            Container(
+              width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.05,
+              margin: const EdgeInsets.only(top: 60),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black),
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+              ),
               child: TextField(
-                controller: _controltask,
+                controller: _controlTask,
                 decoration: const InputDecoration(
                     hintText: "Tittle",
+                    border: InputBorder.none,
                     hintStyle: TextStyle(fontStyle: FontStyle.italic)),
               ),
             ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.8,
-              height: MediaQuery.of(context).size.height * 0.05,
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.4,
+              margin: const EdgeInsets.only(top: 5),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black),
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+              ),
               child: TextField(
-                controller: _discripController,
+                controller: _controllerDescription,
                 decoration: const InputDecoration(
-                    hintText: "Discription",
+                    hintText: "Description",
+                    border: InputBorder.none,
                     hintStyle: TextStyle(fontStyle: FontStyle.italic)),
               ),
             ),
             Row(
               children: [
                 Container(
-                  height: 30,
+                  height: MediaQuery.of(context).size.height * 0.05,
                   width: MediaQuery.of(context).size.width * 0.5,
-                  margin: const EdgeInsets.only(top: 100, left: 100),
+                  margin: const EdgeInsets.only(top: 100, left: 90),
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10.0)),
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(color: Colors.black)),
                   child: Center(
                       child: DateTimeField(
                     initialValue: DateTime.now(),
                     format: format,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                    ),
                     onShowPicker: (BuildContext context, newDate) async {
                       final date = await showDatePicker(
                           context: context,
-                          initialDate: mydate,
+                          initialDate: myDate,
                           firstDate: DateTime(1900),
                           lastDate: DateTime(2100));
                       if (date != null) {
@@ -72,13 +91,13 @@ class _SavetaskState extends State<Savetask> {
                             initialTime: TimeOfDay.fromDateTime(
                                 newDate ?? DateTime.now()));
                         setState(() {
-                          millisecondtime = DateTimeField.combine(date, time)
+                          milliSecondTime = DateTimeField.combine(date, time)
                               .millisecondsSinceEpoch
                               .toString();
                         });
                         return DateTimeField.combine(date, time);
                       } else {
-                        return mydate;
+                        return myDate;
                       }
                     },
                   )),
@@ -87,8 +106,8 @@ class _SavetaskState extends State<Savetask> {
             ),
             GestureDetector(
               onTap: () {
-                if (mydate.millisecondsSinceEpoch <=
-                    int.parse(millisecondtime)) {
+                if (myDate.millisecondsSinceEpoch <=
+                    int.parse(milliSecondTime)) {
                   setState(() {
                     state = true;
                   });
@@ -97,11 +116,11 @@ class _SavetaskState extends State<Savetask> {
                     state = false;
                   });
                 }
-                if (_controltask.text != '') {
-                  homeviewstate.pushData(
-                      _controltask.text,
-                      _discripController.text,
-                      millisecondtime.toString(),
+                if (_controlTask.text != '') {
+                  homeViewState.pushData(
+                      _controlTask.text,
+                      _controllerDescription.text,
+                      milliSecondTime.toString(),
                       state);
                   Navigator.popAndPushNamed(context, Pathname.home);
                 } else {
@@ -113,7 +132,8 @@ class _SavetaskState extends State<Savetask> {
                 width: 150,
                 margin: const EdgeInsets.only(top: 100),
                 decoration: BoxDecoration(
-                    color: Colors.deepOrangeAccent,
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.black),
                     borderRadius: BorderRadius.circular(10.0)),
                 child: const Center(
                   child: Text(

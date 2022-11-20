@@ -10,7 +10,7 @@ class SplashService {
     if (hello == null) {
       await Future.delayed(const Duration(seconds: 3));
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const Login_Screen()),
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
           (Route<dynamic> route) => false);
     } else {
       Navigator.of(context).pushAndRemoveUntil(

@@ -17,11 +17,19 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text(
-          "Welcome to MyProject",
-          style: TextStyle(fontSize: 30),
+    return Scaffold(
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/drawer_image.png'),
+                fit: BoxFit.fill)),
+        child: const Center(
+          child: Text(
+            "Welcome to MyProject",
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+          ),
         ),
       ),
     );

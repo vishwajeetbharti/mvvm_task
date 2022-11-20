@@ -4,9 +4,9 @@ const String token = '';
 String number = '';
 var taskValue = 0;
 var saving = false;
-String inittime = '08:00 AM';
-DateTime mydate = DateTime.now();
-String millisecondtime = '';
+String initTime = '08:00 AM';
+DateTime myDate = DateTime.now();
+String milliSecondTime = '';
 bool state = false;
 
-Homeview homeviewstate = Homeview();
+Homeview homeViewState = Homeview();
