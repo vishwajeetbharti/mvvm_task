@@ -86,7 +86,7 @@ class LoginScreenState extends State<LoginScreen> {
                       Utils.flushBarErrorMessage(
                           "Enter correct number", context);
                     } else {
-                      LoginAuth.auth_otp(
+                      LoginAuth.auth_Otp(
                           _countrycode.text, phone.text, context);
                       Utils.flushBarErrorMessage("Otp sent", context);
                     }

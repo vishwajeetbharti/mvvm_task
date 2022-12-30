@@ -9,11 +9,11 @@ import '../view/otp_view.dart';
 import 'shared_pref_model.dart';
 
 class LoginAuth extends ChangeNotifier {
-  static auth_otp(
-      String countrycode, String phone, BuildContext context) async {
-    number = countrycode + phone;
+  static auth_Otp(
+      String countryCode, String phone, BuildContext context) async {
+    number = countryCode + phone;
     await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: countrycode + phone,
+      phoneNumber: countryCode + phone,
       codeSent: (String verificationId, int? resendToken) {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
@@ -24,7 +24,7 @@ class LoginAuth extends ChangeNotifier {
       },
       verificationCompleted: (PhoneAuthCredential credential) {},
       verificationFailed: (FirebaseAuthException e) {
-        Utils.flushBarErrorMessage("Somthing went wroung", context);
+        Utils.flushBarErrorMessage("Something went wrong", context);
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
@@ -40,7 +40,7 @@ class LoginAuth extends ChangeNotifier {
       UserView.saveUser(user.user?.uid.toString() ?? '', number);
       Navigator.pushNamed(context, Pathname.home);
     } catch (e) {
-      Utils.flushBarErrorMessage("Worung Otp", context);
+      Utils.flushBarErrorMessage("Wrung Otp", context);
     }
   }
 }

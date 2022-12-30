@@ -26,11 +26,11 @@ class Homeview extends ChangeNotifier {
     });
   }
 
-  iscomplete(bool state, String taskId) async {
+  isComplete(bool state, String taskId) async {
     String userId = await UserView.getUserid();
     try {
       var snapshot =
-          await ref.child('users').child(userId).child('to_dos').child(taskId);
+          ref.child('users').child(userId).child('to_dos').child(taskId);
 
       snapshot.update({"completed": state});
       for (var element in taskList) {
@@ -67,7 +67,7 @@ class Homeview extends ChangeNotifier {
     notifyListeners();
   }
 
-  String millioDate(String time) {
+  String milliDate(String time) {
     var dt = DateTime.fromMillisecondsSinceEpoch(int.parse(time));
     return DateFormat('dd/MM/yyyy, hh:mm a').format(dt);
   }

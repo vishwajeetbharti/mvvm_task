@@ -8,14 +8,14 @@ import '../constant/strings.dart';
 import '../view_model/shared_pref_model.dart';
 import 'login_view.dart';
 
-class Todohome extends StatefulWidget {
-  const Todohome({Key? key}) : super(key: key);
+class TodoHome extends StatefulWidget {
+  const TodoHome({Key? key}) : super(key: key);
 
   @override
-  State<Todohome> createState() => _TodoHomeState();
+  State<TodoHome> createState() => _TodoHomeState();
 }
 
-class _TodoHomeState extends State<Todohome> {
+class _TodoHomeState extends State<TodoHome> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController controlTime = TextEditingController();
 
@@ -174,8 +174,7 @@ class _TodoHomeState extends State<Todohome> {
                                     ),
                                   ),
                                   Text(
-                                    value
-                                        .millioDate(value.taskList[index].time),
+                                    value.milliDate(value.taskList[index].time),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 20),

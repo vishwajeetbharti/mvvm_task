@@ -46,7 +46,7 @@ class _QuestionState extends State<Question> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      homeViewState.iscomplete(widget.status, widget.index);
+                      homeViewState.isComplete(widget.status, widget.index);
 
                       Navigator.popAndPushNamed(context, Pathname.home);
                     },
